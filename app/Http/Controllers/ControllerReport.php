@@ -23,6 +23,18 @@ class ControllerReport extends Controller
       ];
    }
 
+   public function getDatabaseConfigMysql()
+   {
+       return [
+           'driver'   => 'mysql',
+           'host'     => env('DB_HOST'),
+           'port'     => env('DB_PORT'),
+           'username' => env('DB_USERNAME'),
+           'password' => env('DB_PASSWORD'),
+           'database' => env('DB_DATABASE')
+       ];
+   }
+
    public function generateReport()
    {   
          
@@ -31,18 +43,32 @@ class ControllerReport extends Controller
     $filename =  $nome  . time();
     $output = base_path('/public/reports/' . $filename);
 
-    JasperPHP::compile(storage_path('app/public'). '/relatorios/teste10.jrxml')->execute();
+    JasperPHP::compile(storage_path('app/public'). '/relatorios/reportJasper.jrxml')->execute();
    
     
     JasperPHP::process(
-      storage_path('app/public/relatorios/teste10.jasper') ,
+      storage_path('app/public/relatorios/reportJasper.jasper') ,
       $output,
       array($extensao),
-      array('AdataIni' => '2020-01-15 00:00:04.340' , 'Bdatafim' => '2020-03-15 23:56:04.340'),
-      $this->getDatabaseConfig(),
+      array('user_name' => ''),
+      $this->getDatabaseConfigMysql(),
+      "pt_BR"
+    )->execute();
+
+    /* verificando possiveis erros - Try to output the command using the function output();
+    Comente o comando acima e descomente o que esta abaixo, pegue o rerultado e execute no termnial 
+    para verificar o erro */
+
+   /* echo JasperPHP::process(
+      storage_path('app/public/relatorios/reportJasper.jasper') ,
+      $output,
+      array($extensao),
+      array('user_name' => ''),
+      $this->getDatabaseConfigMysql(),
       "pt_BR"
     )->output();
-/*
+     exit(); */
+   
    $file = $output .'.'.$extensao ;
 
    if (!file_exists($file)) {
@@ -67,29 +93,21 @@ class ControllerReport extends Controller
        return response()->file($file)->deleteFileAfterSend();
      }
    
-   */
    }
   
    public function getParametros()
 	{
 	  $output = 
-        JasperPHP::list_parameters(storage_path('app/public'). '/relatorios/teste10.jrxml')->execute();
+        JasperPHP::list_parameters(storage_path('app/public'). '/relatorios/reportJasper.jrxml')->execute();
    
         foreach($output as $parameter_description)
         {
-            echo $parameter_description . '<br>' ;
             $parameter_description = trim($parameter_description);
-            $parameter_description  = str_replace("  " , " " , $parameter_description);
-            $parameter_description  = str_replace("   " , " " , $parameter_description);
-            $parameter_description  = str_replace("    " , " " , $parameter_description);
+            //echo $parameter_description . '<br>' ;
             $dados = explode(" ", trim($parameter_description), 4 );
-          // echo 'Parametros:  ' .  $dados[1] . '  Tipo de Dados:  ' . $dados[2] . ' Descricao do Campo:   ' . $dados[3] . '<br>';
-            foreach($dados as $d)
-            {
-              echo $d . '-'. '<br>'  ;
-            }
-           $dados = null ;
-           $parameter_description = null;
+            echo '<strong>Parametro:</strong>  ' .  $dados[1] . 
+                ' <strong>Tipo de Dados:</strong>  ' . $dados[2] .   
+                ' <strong>Descricao do Campo:</strong>   ' . $dados[3] . '<br>';
         }
 	}
       
