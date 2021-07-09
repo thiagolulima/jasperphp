@@ -1,4 +1,4 @@
-# Conteúdo Desenvolvido nas Videos Aulas sobre Jasper Reports com Laravel.
+# Conteúdo Desenvolvido nas videos aulas sobre Jasper Reports com Laravel.
 
 ** [Link Video Aulas](https://www.youtube.com/playlist?list=PL5o2Kk3hauP_SOnVv5lz9TwZp1np8i_4G) **
 
@@ -17,13 +17,14 @@ DB_PASSWORD=
 ```
 php artisan migrate
 php artisan db:seed
+composer install
 ```
 ## routes 
 ```
 localhost/report   :  gera um exemplo de relatorio em PDF 
 localhost/parametros : lista os parametros do relatório
 ```
-## Verificando possiveis erros
+## Verificando possíveis erros
 
 ###### No caminho : vendor/cossou/jasperphp/src/jasperPHP  
 ###### Acesse a classe JasperPHP.php  
