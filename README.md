@@ -2,6 +2,12 @@
 
 ** [Link Video Aulas](https://www.youtube.com/playlist?list=PL5o2Kk3hauP_SOnVv5lz9TwZp1np8i_4G) **
 
+## Requirements
+
+```
+Java JDK 1.6  or  >
+PHP exec() function
+```
 ## Configure seu banco de dados no arquivo .env
 
 ```
