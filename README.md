@@ -1,4 +1,4 @@
-# Conteúdo Desenvolvido nas videos aulas sobre Jasper Reports com Laravel.
+# Conteúdo desenvolvido na playlist sobre Jasper Reports com Laravel.
 
 ** [Link Video Aulas](https://www.youtube.com/playlist?list=PL5o2Kk3hauP_SOnVv5lz9TwZp1np8i_4G) **
 
