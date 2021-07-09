@@ -9,6 +9,10 @@ class ControllerReport extends Controller
 {
     public function getDatabaseConfig()
     {
+      /* $jdbc_dir : Informe o caminho real onde o driver jdbc.
+      Adicione o jdbc_driver conforme array abaixo.
+      jdbc_url : informe o IP e a porta da instancia do seu banco e databasename informe o nome do banco */
+      
       $jdbc_dir = 'C:\xampp\htdocs\JasperReport\vendor\cossou\jasperphp\src\JasperStarter\jdbc';
        return [
          'driver'   => 'generic',
@@ -45,7 +49,6 @@ class ControllerReport extends Controller
 
     JasperPHP::compile(storage_path('app/public'). '/relatorios/reportJasper.jrxml')->execute();
    
-    
     JasperPHP::process(
       storage_path('app/public/relatorios/reportJasper.jasper') ,
       $output,
