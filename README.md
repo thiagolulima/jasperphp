@@ -15,9 +15,9 @@ DB_PASSWORD=
 
 ## Rode os comandos no terminal
 ```
+composer install
 php artisan migrate
 php artisan db:seed
-composer install
 ```
 ## routes 
 ```
